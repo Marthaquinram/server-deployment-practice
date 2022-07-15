@@ -6,8 +6,19 @@
 
 ### Pull Request
 
-- [Lab01]<https://github.com/Marthaquinram/server-deployment-practice/pull/3>
-- [Lab02] <https://github.com/Marthaquinram/server-deployment-practice/pull/4>
+- [Lab01-PR]<https://github.com/Marthaquinram/server-deployment-practice/pull/3>
+- [Lab02-PR] <https://github.com/Marthaquinram/server-deployment-practice/pull/4>
+
+# Links
+- [Heroku-Production]()
+- [Heroku-Dev]()
+- [Github-Action]()
+
+# Starting up
+- ensure you have your .env file set up
+    - exapmle PORT=(enter in port number here)
+- In terminal run npm i to install dependencies and then run npm test to run all test.
+- This is the deployed site ()
 
 #### Notes:
 - Followed instructions and demo step by step and successfully got test to pass on local and github.
