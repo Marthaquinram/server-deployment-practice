@@ -15,18 +15,18 @@ const server = require("../src/server");
 const request = supertest(server.app);
 
 describe("Node Server", () => {
-    // it("says hello world", async () => {
-    //     // set up the test so it can do a thing
-    //     // Prepare the server
-    //     // (see above line 15, we dont need to rewrite that line every time. saves duplication.)
-    //     // perform an action, that does the thing
-    //     // request the / route
-    //     const response = await request.get("/"); // The response is a promise
-    //     // assert or expect the result of the action
-    //     // expect the / route to respond with hello
-    //     expect(response.status).toBe(200);
-    //     expect(response.text).toBe("Hello, World");
-    // });
+    it("says hello world", async () => {
+        // set up the test so it can do a thing
+        // Prepare the server
+        // (see above line 15, we dont need to rewrite that line every time. saves duplication.)
+        // perform an action, that does the thing
+        // request the / route
+        const response = await request.get("/"); // The response is a promise
+        // assert or expect the result of the action
+        // expect the / route to respond with hello
+        expect(response.status).toBe(200);
+        expect(response.text).toBe("Hello, World");
+    });
 
     it("returns some data", async () => {
         const response = await request.get("/data");
@@ -48,4 +48,8 @@ describe("Node Server", () => {
         expect(response.status).toBe(500);
     });
 
+    it('martha', async () => {
+        const response = await request.get('/person/?name=martha').query({});
+        expect(response.status).toBe(200);
+    });
 });

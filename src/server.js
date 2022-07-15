@@ -18,9 +18,9 @@ app.use(logger);
 // app.use(validator);
 
 //  /hello
-// const hello = (req, res) => {
-//     res.status(200).send('Hello, World');
-// };
+const hello = (req, res) => {
+    res.status(200).send('Hello, World');
+};
 //  /data
 const data = (req, res) => {
     res.status(200).send({
@@ -40,7 +40,7 @@ const person = (req, res) => {
 
 
 
-// app.get('/', hello);
+app.get('/', hello);
 app.get('/data', data);
 
 app.get('/person', validator, person);
@@ -58,4 +58,4 @@ module.exports = {
 
 
 // ? is query
-// : is params
+// /: is params
