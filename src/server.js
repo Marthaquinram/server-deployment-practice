@@ -12,11 +12,15 @@ const { logger } = require('../src/middleware/logger');
 const { validator } = require('../src/middleware/validator');
 const notFoundError = require('./error-handlers/404');
 const serverError = require('./error-handlers/500');
+const app = express();
+app.use(express.json());
+app.use(logger);
+// app.use(validator);
 
 //  /hello
-const hello = (req, res) => {
-    res.status(200).send('Hello, World');
-};
+// const hello = (req, res) => {
+//     res.status(200).send('Hello, World');
+// };
 //  /data
 const data = (req, res) => {
     res.status(200).send({
@@ -26,26 +30,32 @@ const data = (req, res) => {
 };
 // Create the / person route within your server.js
 const person = (req, res) => {
-    res.status(200).send({ name: req.params.name });
+    if (req.query.name) {
+        res.status(200).send({ name: req.query.name });
+    } else {
+        res.status(500).send('name is required');
+    }
 };
 
 
 
-const app = express();
-app.use(logger);
-app.use(validator);
 
-app.get('/', hello);
+// app.get('/', hello);
 app.get('/data', data);
-app.get('/person/:name', person);
-app.get('/notFoundError', notFoundError);
-app.get('/serverError', serverError);
+
+app.get('/person', validator, person);
 
 function start(port) {
     app.listen(port, () => console.log(`Server listening on post ${port}`));
 }
 
+app.use('*', notFoundError);
+app.use(serverError);
 module.exports = {
     app,
     start
 };
+
+
+// ? is query
+// : is params

@@ -4,8 +4,10 @@
 - Assignment:
     - Time to get hands on with Node.js development! Today, you’ll create and deploy a web server using CI and CD and get used to the general process of building and deploying servers, and prepping your work for grading
 
-### PR
-- <>
+### Pull Request
+
+- [Lab01]<https://github.com/Marthaquinram/server-deployment-practice/pull/3>
+- [Lab02] <https://github.com/Marthaquinram/server-deployment-practice/pull/4>
 
 #### Notes:
 - Followed instructions and demo step by step and successfully got test to pass on local and github.
