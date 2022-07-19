@@ -1,12 +1,13 @@
 'use strict';
 
 const express = require('express');
-const db = require('./db');
+// const db = require('./db');
 const { logger } = require('../src/middleware/logger');
 const { validator } = require('../src/middleware/validator');
 const notFoundError = require('./error-handlers/404');
 const serverError = require('./error-handlers/500');
-const { createPlayer, allPlayers, getPlayer, deletePlayer, updatePlayer } = require('./models/soccer');
+const { createBand, allBands, getBand, deleteBand, updateBand } = require('./routes/bands');
+const { createPlayer, allPlayers, getPlayer, deletePlayer, updatePlayer } = require('./routes/soccer');
 const app = express();
 app.use(express.json());
 app.use(logger);
@@ -40,12 +41,19 @@ app.get('/', hello);
 app.get('/data', data);
 app.get('/person', validator, person);
 
-//CRUD
+//CRUD soccer
 app.post('/soccer', createPlayer);
 app.get('/soccer', allPlayers);
 app.get('/soccer/:id', getPlayer);
-app.delete('/soccer/:id', deletePlayer);
 app.put('/soccer/:id', updatePlayer);
+app.delete('/soccer/:id', deletePlayer);
+
+//CRUD bands
+app.post('/bands', createBand);
+app.get('/bands', allBands);
+app.get('/bands/:id', getBand);
+app.put('/bands/:id', updateBand);
+app.delete('/bands/:id', deleteBand);
 
 
 
