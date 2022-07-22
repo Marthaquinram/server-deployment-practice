@@ -27,17 +27,6 @@ const db = new Sequelize(connection_string, {
     },
 });
 
-// const User = db.define('User', {
-//     username: DataTypes.STRING,
-//     birthday: DataTypes.DATE
-// });
-
-// const Soccer = db.define('Soccer', {
-//     soccerPlayer: DataTypes.STRING,
-//     team: DataTypes.STRING,
-//     age: DataTypes.NUMBER,
-// });
-
 db.sync();
 
 module.exports = {
