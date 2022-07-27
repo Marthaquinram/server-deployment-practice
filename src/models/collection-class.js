@@ -2,56 +2,60 @@
 'use strict';
 
 class Collection {
-    constructor(name, model) {
+    constructor(model, app, routeName) {
         this.model = model;
-        this.name = name;
+        this.routeModel(app, routeName);
     }
 
-    read(id, options = {}) {
-        let modelParams = { ...options };
+    async read(req, res) {
+        let options = {};
+        let records = null;
+        const id = req.params.id
         if (id) {
-            modelParams.where = { id: id };
-            return this.model.findOne(modelParams);
+            options['where'] = { id };
+            records = await this.model.findOne(options);
         } else {
-            return this.model.findAll(modelParams);
+            records = await this.model.findAll(options);
+        }
+        res.status(200).send(records);
+    }
+
+
+
+    async create(req, res) {
+        res.status(200).send(await this.model.build(req.body).save());
+    }
+
+    async update(req, res) {
+        const id = req.params.id
+        try {
+            if (!id) throw new Error('No target id') //if theres no id you cant update so throw error
+            // let row = await this.model.findOne({ where: { id: id, } });
+            let output = await this.model.update(req.body, { where: { id } });
+            res.status(200).send(output);
+        } catch (error) {
+            res.status(500).send(error);
         }
     }
-    create(json) {
-        return this.model.create(json)
+
+    async delete(req, res) {
+        const id = req.params.id
+        try {
+            if (!id) throw new Error('No target id')
+            await this.model.destroy({ where: { id } })
+            res.status(200).send('I destroy it');
+        } catch (error) {
+            res.status(500).send(error);
+        }
     }
 
-    async update(id, json) {
-        let row = await this.model.findOne({ where: { id: id, } });
-        let updatedRow = await row.update(json);
-        return updatedRow;
+    routeModel = (app, routeName) => { //app.get('/soccer', (req, res) => Soccer.read(req, res));
+        app.post(`/${routeName}`, (req, res) => this.create(req, res));
+        app.get(`/${routeName}`, (req, res) => this.read(req, res));
+        app.get(`/${routeName}/:id`, (req, res) => this.read(req, res));
+        app.put(`/${routeName}/:id`, (req, res) => this.update(req, res));
+        app.delete(`/${routeName}/:id`, (req, res) => this.delete(req, res));
     }
-    delete(id) {
-        return this.model.destroy({ where: { id: id } });
-    }
-
 }
-
-//async/await is gonna be for update
-// .update
-//.destroy
-
-
-
-
-
-//routes
-//CRUD soccer
-// app.post('/soccer', createPlayer);
-// app.get('/soccer', allPlayers);
-// app.get('/soccer/:id', getPlayer);
-// app.put('/soccer/:id', updatePlayer);
-// app.delete('/soccer/:id', deletePlayer);
-
-// //CRUD bands
-// app.post('/bands', createBand);
-// app.get('/bands', allBands);
-// app.get('/bands/:id', getBand);
-// app.put('/bands/:id', updateBand);
-// app.delete('/bands/:id', deleteBand);
 
 module.exports = Collection;
