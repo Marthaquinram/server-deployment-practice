@@ -11,12 +11,13 @@
 - [Lab03-PR](https://github.com/Marthaquinram/server-deployment-practice/pull/10)
 - [Lab03-PR-Update](https://github.com/Marthaquinram/server-deployment-practice/pull/12)
 - [Lab04-PR](https://github.com/Marthaquinram/server-deployment-practice/pull/15)
+- [Lab04-PR-Updated](https://github.com/Marthaquinram/server-deployment-practice/pull/18)
 
 # Links
 
 - [Heroku-Production](https://martha-server-deploy-prod.herokuapp.com/)
 - [Heroku-Dev](https://martha-server-deploy-dev.herokuapp.com/)
-- [Github-Action](https://github.com/Marthaquinram/server-deployment-practice/actions)
+- [Github-Action](https://github.com/Marthaquinram/server-deployment-practice/actions/runs/2748945978)
 
 
 # Starting up
@@ -25,6 +26,7 @@
 - In terminal run npm i to install dependencies and then run npm test to run all test.
 - In terminal run brew install sqlite3, sequalize
 - Add DATABASE_URL with heroku postgres link to .env file.
+- Run thunderclient and test both end routes /soccer and /bands. see models for data model on what data types to search in thunderclient.
 
 #### Notes:
 - Followed instructions and demo step by step and successfully got test to pass on local and github.
