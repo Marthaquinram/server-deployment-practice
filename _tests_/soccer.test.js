@@ -49,10 +49,31 @@ describe('soccer', () => {
         });
 
     });
+    it('can update a soccer player', async () => {
+        let createResponse = await request.post('/soccer').send({
+            soccerPlayer: 'Hector Bellerin',
+            team: 'Arsenal',
+            age: 27,
 
-    // it('list a soccer player', async () => {
-    //     let soccerPlayerList = await response.get('/soccer');
-    //     expect(soccerPlayerList.status).toBe(200);
-    //     expect(soccerPlayerList.body[0]).toHa
-    // }
+        });
+        expect(createResponse.status).toBe(200);
+        const createdId = createResponse.body.id;
+
+        const updateRes = await request.put(`/soccer/${createdId}`);
+        expect(updateRes.status).toBe(200);
+    });
+    it('deletes a soccer player', async () => {
+        let createResponse = await request.post('/soccer').send({
+            soccerPlayer: 'Hector Bellerin',
+            team: 'Arsenal',
+            age: 27,
+
+        });
+
+        expect(createResponse.status).toBe(200);
+        const createdId = createResponse.body.id;
+
+        let retrieveResponse = await request.delete(`/soccer/${createdId}`);
+        expect(retrieveResponse.status).toBe(200);
+    });
 });

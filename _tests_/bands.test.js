@@ -44,5 +44,29 @@ describe('bands', () => {
             genre: 'rock',
         });
     });
+    it('can update a band', async () => {
+        let createResponse = await request.post('/bands').send({
+            musicBands: 'test band',
+            genre: 'rock'
 
+        });
+        expect(createResponse.status).toBe(200);
+        const createdId = createResponse.body.id;
+
+        const updateRes = await request.put(`/bands/${createdId}`);
+        expect(updateRes.status).toBe(200);
+    });
+    it('deletes a band', async () => {
+        let createResponse = await request.post('/bands').send({
+            musicBands: 'test band',
+            genre: 'rock'
+
+        });
+
+        expect(createResponse.status).toBe(200);
+        const createdId = createResponse.body.id;
+
+        let retrieveResponse = await request.delete(`/bands/${createdId}`);
+        expect(retrieveResponse.status).toBe(200);
+    });
 });
